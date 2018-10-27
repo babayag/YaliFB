@@ -1,0 +1,193 @@
+<section>
+    <div class="page-header">
+      <h1>need our help</h1>
+    </div>
+    
+    <main ng-cloak>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">&nbsp;</div>
+        </div>
+        <form name="multiStepForm" class="form-validation" role="form" novalidate>
+          <div class="animate-switch-container" ng-switch on="stage" ng-class="{forward: direction, backward:!direction}">
+            <div class="animate-switch" ng-switch-default>
+              <div class="row">
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-primary" ng-click="setChoiceOfPlan('get it for 9.95$');next('stage1')">get it for 9.95$</button>
+                  <button type="button" class="btn btn-warning" ng-click="setChoiceOfPlan('get custom plan');next('stage1')">get custom plan</button>
+                  <button type="button" class="btn btn-success" ng-click="setChoiceOfPlan('get your visual indentity build');next('stage1')">get your visual indentity build</button>
+                  <button type="button" class="btn btn-danger" ng-click="setChoiceOfPlan('intermediate plan for pro');next('stage1')">intermediate plan for pro</button>
+                </div>
+              </div>
+            </div>
+            <div class="animate-switch" ng-switch-when="stage1">
+              <div class="row">
+                <h1>what day are you free for our meeting</h1>
+                <hr>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <!-- <div class="form-group">
+                    <label for="tb-fname">First Name:</label>
+                    <input type="text" class="form-control" id="tb-fname" name="firstName" ng-maxlength="250" ng-model="formParams.firstName" required ng-class="{'input-error': formValidation && multiStepForm.firstName.$error.required}" >
+                    <span ng-show="multiStepForm.firstName.$error.maxlength">
+                      Max character length reached.
+                    </span>
+                  </div> -->
+                  <span ng-repeat="aod in arrOfdate">
+                    <input type="radio" name="aod" id="aod" ng-model="formParams.dateRdv" value="{{ aod | date:'dd MMM' }}"/>
+                    <label>
+                      {{ aod | date:'dd MMM' }}
+                    </label>
+                  </span>
+                </div>
+              </div>
+              <!-- <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label for="tb-lname">Last Name:</label>
+                    <input type="text" class="form-control" id="tb-lname" name="lastName" ng-maxlength="250" ng-model="formParams.lastName" ng-class="{'input-error': formValidation && multiStepForm.lastName.$error.required}" required>
+                    <span ng-show="multiStepForm.lastName.$error.maxlength">
+                      Max character length reached.
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label for="tb-email">Email:</label>
+                    <input type="email" class="form-control" id="tb-email" name="email" ng-maxlength="100" ng-model="formParams.email" ng-class="{'input-error': formValidation && multiStepForm.email.$error.required}" ng-model-options="{ updateOn: 'blur' }" required>
+                    <span ng-show="multiStepForm.email.$error.email">
+                      Incorrect email format.
+                    </span>
+                    <span ng-show="multiStepForm.email.$error.maxlength">
+                      Max character length reached.
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label for="tb-cc-email">CC:</label>
+                    <input type="email" class="form-control" id="tb-cc-email" name="ccEmail" ng-maxlength="100" ng-model="formParams.ccEmail" ng-class="{'input-error': formValidation && multiStepForm.ccEmail.$error.email}" ng-model-options="{ updateOn: 'blur' }">
+                    <span ng-show="multiStepForm.ccEmail.$error.email">
+                      Incorrect email format.
+                    </span>
+                    <span ng-show="multiStepForm.ccEmail.$error.maxlength">
+                      Max character length reached.
+                    </span>
+                  </div>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                  <button type="button" class="btn btn-xs btn-warning" ng-click="addCCEmail()">Add</button>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <div ng-repeat="cc in formParams.ccEmailList">
+                  </div>
+                </div>
+              </div> -->
+              <button type="button" class="btn btn-info" ng-click="back('')">Back</button>
+              <button type="button" class="btn btn-primary" ng-click="next('stage2')">Next</button>
+            </div>
+            <div class="animate-switch" ng-switch-when="stage2">
+              <!-- <div class="form-group">
+                <label for="ta-body">Message Body:</label>
+                <textarea class="form-control" rows="5" id="ta-body" ng-model="formParams.messageBody"></textarea>
+              </div> -->
+              <div>
+              <span ng-repeat="hour in HourRdv">
+                <input type="radio" name="hour" id="hour" ng-model="formParams.hourRdv" value="{{ hour }}"/>
+                <label>
+                  {{ hour }}
+                </label>
+              </span>
+            </div>
+              <button type="button" class="btn btn-info" ng-click="back('stage1')">Back</button>
+              <button type="button" class="btn btn-primary" ng-click="next('stage3')">Next</button>
+            </div>
+            <div class="animate-switch" ng-switch-when="stage3">
+              <h3>Summary</h3>
+              <p>offer choose : {{ choiceOfplan }}</p>
+              <p>date of RDV: {{formParams.hourRdv}}</p>
+              <p>hour of RDV: {{formParams.dateRdv}}</p>
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <label class="control-label" for="fullname" style="font-size: 14px;">
+                    Full Name *
+                  </label>
+  
+                  <input type="text" rows="6" class="form-control" name="fullname" ng-model="formParams.fullName" required="">
+  
+                  <!-- ngIf: (dateForm.fullname.$dirty || dateForm.$submitted) -->
+                </div>
+  
+                <div class="form-group">
+                  <label class="control-label" for="email" style="font-size: 14px;">
+                    E-mail Address *
+                  </label>
+  
+                  <input type="email" rows="6" class="form-control" name="email" ng-model="formParams.email" required="">
+  
+                  <!-- ngIf: (dateForm.email.$dirty || dateForm.$submitted) -->
+                </div>
+  
+                <div class="form-group">
+                  <label class="control-label" for="phone" style="font-size: 14px;">
+                    Phone Number *
+                  </label>
+  
+                  <input type="tel" rows="6" class="form-control " name="phone" ng-model="formParams.phone" required="">
+  
+                  <!-- ngIf: (dateForm.phone.$dirty || dateForm.$submitted) -->
+                </div>
+  
+                <div class="form-group">
+                  <label class="control-label" for="skypeid" style="font-size: 14px;">
+                    Skype Id
+                  </label>
+  
+                  <input type="text" rows="6" class="form-control" name="skypeid" ng-model="formParams.skypeId">
+                </div>
+  
+                <div class="form-group">
+                  <label class="control-label" for="details" style="font-size: 14px;">
+                    Describe the subject of the schedule
+                  </label>
+  
+                  <textarea type="text" rows="6" class="form-control" name="subject" ng-model="formParams.message" style="resize: none"></textarea>
+                </div>
+  
+                <div class="form-group ng-binding">
+                  <div class="icheckbox_square-green checked" style="position: relative;"><input icheck="" class="form-control" type="checkbox" ng-model="vm.notify" ng-init="vm.notify = vm.notify||true" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div> Recieve notification mail.
+                  <i class="fa fa-info-circle" style="cursor:help;" tooltip-placement="right" uib-tooltip="The infos of schedule will be send to the email you have give in field. If you dont want it, uncheck this case."></i>
+                </div>
+  
+  
+              </div>
+              <button type="button" class="btn btn-info" ng-click="back('stage2')">Back</button>
+              <button type="button" class="btn btn-warning" ng-click="submitForm()">Submit</button>
+            </div>
+            <div class="animate-switch" ng-switch-when="success">
+              <div class="success-wrap">
+                <h2 class="confirmation-text">Thank you</h2>
+                <p>Your message has been sent.<br>You should receive a confirmation email.</p>
+                <div><button type="button" class="btn btn-success" ng-click="reset()" >Send Another</button></div>
+              </div>
+            </div>
+            <div class="animate-switch" ng-switch-when="error" >
+              <div class="error-wrap">
+                <h2 class="confirmation-text">Error</h2>
+                <p>There was an error when attempting to submit your request.<br>Please try again later.</p>
+                <p><strong>*This will always error until a web service URL is set.*</strong></p>
+                <div><button type="button" class="btn btn-danger" ng-click="reset()" >Try again</button></div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </main>
+</section>
+  
