@@ -103,3 +103,6 @@ a:hover .header-profile-image {
   left:0;
 }
 
+.modal-backdrop { 
+    background-color: rgba(94, 88, 88, 0.589);
+  }

@@ -5,27 +5,35 @@
     .module('courses.admin')
     .controller('CoursesAdminController', CoursesAdminController);
 
-  CoursesAdminController.$inject = ['$scope', '$state', '$window', 'courseResolve', 'Authentication', 'Notification'];
+  CoursesAdminController.$inject = ['$scope', '$state', '$window','$uibModal', 'courseResolve', 'Authentication', 'Notification'];
 
-  function CoursesAdminController($scope, $state, $window, course, Authentication, Notification) {
+  function CoursesAdminController($scope, $state, $window, $uibModal, course, Authentication, Notification) {
     var vm = this;
 
     vm.course = course;
     vm.authentication = Authentication;
     vm.form = {};
-    vm.remove = remove;
+    vm.openModal = openModal;
     vm.save = save;
 
     // Remove existing Course
-    function remove() {
-      if ($window.confirm('Are you sure you want to delete?')) {
-        vm.course.$remove(function () {
-          $state.go('admin.courses.list');
-          Notification.success({ message: '<i class="glyphicon glyphicon-ok"></i> Course deleted successfully!' });
-        });
-      }
+    function openModal() {
+      var modal = $uibModal.open({
+        templateUrl: '/modules/courses/client/views/admin/modal.client.view.html',
+        controller: 'ModalAdminController',
+        controllerAs: 'vm',
+        backdrop: true, 
+        size: 'md',
+        resolve: {
+            course: 
+            function () {
+              return vm.course
+          }
+      },
+      windowClass: "animated fadeInY"
+  });
     }
-
+  
     // Save Course
     function save(isValid) {
       if (!isValid) {

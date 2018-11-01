@@ -1,12 +1,12 @@
-<section>
+ 
   <div class="page-header">
     <h1>{{vm.course._id ? 'Edit Course' : 'New Course'}}</h1>
   </div>
-  <div class="pull-right">
-    <a ng-show="vm.course._id" class="btn btn-primary" ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
+
+      <button class="btn btn-danger"  type="button" ng-click="vm.openModal()"><i class="glyphicon glyphicon-trash"></i>   delete this course</button>
+    
+  
+    
   <div class="col-md-12">
     <form name="vm.form.courseForm" class="form-horizontal" ng-submit="vm.save(vm.form.courseForm.$valid)" novalidate>
       <fieldset>
@@ -41,4 +41,3 @@
       </fieldset>
     </form>
   </div>
-</section>
