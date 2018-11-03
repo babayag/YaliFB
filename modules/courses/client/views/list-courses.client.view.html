@@ -1,19 +1,36 @@
 <section>
+  <style>
+    .coursesLinks{
+      width: 32%;
+      margin: 7px;
+
+    }
+    .courseContainer{
+      padding: 0;
+      margin: 0; 
+    }
+  </style>
   <div class="page-header">
     <h1>List of our courses</h1>
   </div>
-  <div class="list-group">
-    <a ng-repeat="course in vm.courses" ui-sref="courses.view({ courseId: course._id })" class="list-group-item">
-      <small class="list-group-item-text">
+  <div class="list-group courseContainer">
+    <a ng-repeat="course in vm.courses" ui-sref="courses.view({ courseId: course._id })" class="list-group-item col-md-4 coursesLinks">
+      <!-- <small class="list-group-item-text">
         Posted on
         <span ng-bind="course.created | date:'mediumDate'"></span>
         by
         <span ng-if="course.user" ng-bind="course.user.displayName"></span>
-        <span ng-if="!course.user">Deleted course</span>
-      </small>
+        <span ng-if="!course.user">Deleted User</span>
+      </small> -->
       <h4 class="list-group-item-heading" ng-bind="course.title"></h4>
+      <video pster="/modules\courses\client\img\thumbnail.jpg" width="320" height="240">
+        <source src="/modules\courses\client\videos\video.mp4" type="video/mp4">
+        <!-- <source src="movie.ogg" type="video/ogg"> -->
+        Your browser does not support the video tag.
+      </video>     
       <p class="list-group-item-text" ng-bind="course.content"></p>
+
     </a>
-    <a ui-sref="courses.askHelp" class="pull-left">need help !</a>
+    <a ui-sref="courses.askHelp" class="pull-left">Need help!!</a>
   </div>
 </section>

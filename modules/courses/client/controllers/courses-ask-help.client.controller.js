@@ -13,6 +13,9 @@
       
       //$scope.course = course;
       $scope.authentication = Authentication;
+      $scope.correctDesign = correctDesign;
+      $scope.designCorrected = false;
+       
       //vm.test  = "lololl";
       $scope.choiceOfplan = "";
       //$scope.loadRadiodate = loadRadiodate;
@@ -24,12 +27,18 @@
       $scope.formValidation = false;
       $scope.toggleJSONView = false;
       $scope.toggleFormErrorsView = false;
-      
+
+     
       $scope.formParams = {
         ccEmail: '',
         ccEmailList: []
       };
       
+
+
+      function correctDesign(){ //alert("yoo")
+        // $scope.formParams.dateRdv.click();
+      }
 
 
       // set the date available for rdv
@@ -143,5 +152,7 @@
         $scope.stage = "";
       }
     }
+
+    
   }());
   
