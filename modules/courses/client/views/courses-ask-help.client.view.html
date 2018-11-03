@@ -1,6 +1,6 @@
 <section>
     <div class="page-header">
-      <h1>need our help</h1>
+      <h1>Need our help</h1>
     </div>
     
     <main ng-cloak>
@@ -22,22 +22,20 @@
             </div>
             <div class="animate-switch" ng-switch-when="stage1">
               <div class="row">
-                <h1>what day are you free for our meeting</h1>
-                <hr>
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                  <!-- <div class="form-group">
-                    <label for="tb-fname">First Name:</label>
-                    <input type="text" class="form-control" id="tb-fname" name="firstName" ng-maxlength="250" ng-model="formParams.firstName" required ng-class="{'input-error': formValidation && multiStepForm.firstName.$error.required}" >
-                    <span ng-show="multiStepForm.firstName.$error.maxlength">
-                      Max character length reached.
-                    </span>
-                  </div> -->
-                  <span ng-repeat="aod in arrOfdate">
-                    <input type="radio" name="aod" id="aod" ng-model="formParams.dateRdv" value="{{ aod | date:'dd MMM' }}"/>
-                    <label>
-                      {{ aod | date:'dd MMM' }}
-                    </label>
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <span ng-repeat="aod in arrOfdate" >
+                    <span class="radioContainer">
+                        <input type="radio" name="aod" id="{{'day'+$index}}" ng-model="formParams.dateRdv" value="{{ aod | date:'dd MMM' }}">
+                        <label class="day " for="{{'day'+$index}}">
+                          {{ aod | date:'dd MMM' }}
+                        </label>
+                    </span>                   
                   </span>
+                  <div class="checkboxesDiv">
+                    <button type="button" class="btn btn-info backBtn" ng-click="back('')">Back</button>
+                    <button type="button" class="btn btn-primary nextBtn" ng-click="next('stage2')">Next</button>
+                  </div>
                 </div>
               </div>
               <!-- <div class="row">
@@ -88,30 +86,37 @@
                   </div>
                 </div>
               </div> -->
-              <button type="button" class="btn btn-info" ng-click="back('')">Back</button>
-              <button type="button" class="btn btn-primary" ng-click="next('stage2')">Next</button>
             </div>
             <div class="animate-switch" ng-switch-when="stage2">
               <!-- <div class="form-group">
                 <label for="ta-body">Message Body:</label>
                 <textarea class="form-control" rows="5" id="ta-body" ng-model="formParams.messageBody"></textarea>
               </div> -->
-              <div>
-              <span ng-repeat="hour in HourRdv">
-                <input type="radio" name="hour" id="hour" ng-model="formParams.hourRdv" value="{{ hour }}"/>
-                <label>
-                  {{ hour }}
-                </label>
-              </span>
-            </div>
-              <button type="button" class="btn btn-info" ng-click="back('stage1')">Back</button>
-              <button type="button" class="btn btn-primary" ng-click="next('stage3')">Next</button>
+              <div class="row">
+                  <div class="col-xs-3 col-sm-3 col-md-4 col-lg-3"></div>
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="timeBox">
+                      <span ng-repeat="hour in HourRdv">
+                        <span class="radioContainer">
+                            <input type="radio" name="hour" id="{{'heur'+$index}}" ng-model="formParams.hourRdv" value="{{ hour }}">
+                            <label class="theTime" for="{{'heur'+$index}}">
+                                {{ hour }}
+                            </label>
+                        </span>                   
+                      </span>
+                    </div>
+                  <div class="checkboxesDiv">
+                    <button type="button" class="btn btn-info" ng-click="back('stage1')">Back</button>
+                    <button type="button" class="btn btn-primary nextBtn" ng-click="next('stage3')">Next</button>
+                  </div>
+                </div> 
+              </div>
             </div>
             <div class="animate-switch" ng-switch-when="stage3">
               <h3>Summary</h3>
-              <p>offer choose : {{ choiceOfplan }}</p>
-              <p>date of RDV: {{formParams.hourRdv}}</p>
-              <p>hour of RDV: {{formParams.dateRdv}}</p>
+              <p>Offer choose : {{ choiceOfplan }}</p>
+              <p>Hour of RDV: {{formParams.hourRdv}}</p>
+              <p>Date of RDV: {{formParams.dateRdv}}</p>
               <div class="col-md-6">
 
                 <div class="form-group">
