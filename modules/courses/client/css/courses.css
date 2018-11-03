@@ -49,14 +49,88 @@
     text-align: center;
     box-shadow: 0px 3px 10px -2px hsla(150, 5%, 65%, 0.5);
     background: white;
-    margin-bottom: 30px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
 .nextBtn{
-    margin-left: 73%;
+    position: absolute;
+    right: 15px;
+}
+.backBtn{
+    position: absolute;
+    left: 15px;
 }
 
 .timeBox{
-    padding-left: 11%;
+    padding-left: 13%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+.lilTitle{
+    margin-bottom: 15px;
+}
+
+.summaryDiv .blueText{
+    color : #00A2FF;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    font-size: 1.2em;
+    font-weight: 200;   
+}
+.summaryDiv span{
+    color : #00A2FF;
+    height: 12px;
+}
+
+.planChoice{
+    border: 1px solid #b0b2b848;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.planChoice:hover{
+    background-color: rgba(71, 93, 218, 0.048);
+    box-shadow: 1px 1px 2px 2px #00000009;
+}
+
+@media screen and (max-width: 1200px) {
+    .timeBox{
+        padding-left: 5%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .timeBox{
+        padding-left: 15%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .timeBox{
+        padding-left: 10%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  }
+  
+
+  
+  @media screen and (max-width: 590px) {
+    .timeBox{
+        padding-left: 0%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  }
