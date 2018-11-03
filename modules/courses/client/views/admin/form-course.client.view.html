@@ -1,44 +1,74 @@
-<section>
-  <div class="page-header">
-    <h1>{{vm.course._id ? 'Edit Course' : 'New Course'}}</h1>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+  
+ <section id="containPage">
+   <div id="mainContain">
+     
+  <div>
+    <h1 class="colorT blockB" style="text-align: center; "> {{vm.course._id ? 'Edit Course' : 'New Course'}}</h1>
+   <!-- <button id="btnS" type="submit" class="btn btn-default blockB">{{vm.course._id ? 'Update' : 'Create'}}</button>-->
   </div>
-  <div class="pull-right">
-    <a ng-show="vm.course._id" class="btn btn-primary" ng-click="vm.remove()">
-      <i class="glyphicon glyphicon-trash"></i>
-    </a>
-  </div>
-  <div class="col-md-12">
+ 
+<hr id="barD">
+  
+
+  <br>
+  <div class="col-md-">
     <form name="vm.form.courseForm" class="form-horizontal" ng-submit="vm.save(vm.form.courseForm.$valid)" novalidate>
       <fieldset>
         <div class="form-group" show-errors>
-          <label class="control-label" for="title">title</label>
+          <label class="control-label colorT" for="title">Title</label>
           <input name="title" type="text" ng-model="vm.course.title" id="title" class="form-control" placeholder="Title" required autofocus>
           <div ng-messages="vm.form.courseForm.title.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Course title is required.</p>
           </div>
         </div>
+        
         <div class="form-group" show-errors>
-          <label class="control-label" for="videoLink">videoLink</label>
+          <label class="control-label colorT" for="videoLink">VideoLink</label>
           <input name="videoLink" type="text" ng-model="vm.course.videoLink" id="videoLink" class="form-control" placeholder="videoLink" required autofocus>
           <div ng-messages="vm.form.courseForm.videoLink.$error" role="alert">
             <p class="help-block error-text" ng-message="required">videoLink title is required.</p>
           </div>
+
+        <!-- <iframe width="100" height="50"
+            src="url_de_ta_video">
+          </iframe>
+
+        -->
         </div>
         <div class="form-group" show-errors>
-          <label class="control-label" for="title">Worksheet</label>
+          <label class="control-label colorT" for="title">Worksheet</label>
           <input name="Worksheet" type="text" ng-model="vm.course.Worksheet" id="Worksheet" class="form-control" placeholder="Worksheet" required autofocus>
           <div ng-messages="vm.form.courseForm.Worksheet.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Worksheet title is required.</p>
           </div>
         </div>
         <div class="form-group">
-          <label class="control-label" for="content">Content</label>
+          <label class="control-label colorT" for="content">Content</label>
           <textarea name="content" data-ng-model="vm.course.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-default">{{vm.course._id ? 'Update' : 'Create'}}</button>
+          <button type="submit" class="btn btn-info">{{vm.course._id ? 'Update' : 'Create'}}</button>
+          <button class="btn btn-danger pull-right"  type="button" ng-click="vm.openModal()"><i class="glyphicon glyphicon-trash"></i></button>
         </div>
       </fieldset>
     </form>
   </div>
-</section>
+
+</div>
+ </section>
+ <br>
+ <br>
+ <br>
+ <br>
+
+
+
+
+

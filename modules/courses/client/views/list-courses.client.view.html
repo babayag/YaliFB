@@ -9,7 +9,7 @@
         <span ng-bind="course.created | date:'mediumDate'"></span>
         by
         <span ng-if="course.user" ng-bind="course.user.displayName"></span>
-        <span ng-if="!course.user">Deleted User</span>
+        <span ng-if="!course.user">Deleted course</span>
       </small>
       <h4 class="list-group-item-heading" ng-bind="course.title"></h4>
       <p class="list-group-item-text" ng-bind="course.content"></p>
