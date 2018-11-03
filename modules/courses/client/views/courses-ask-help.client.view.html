@@ -1,6 +1,6 @@
 <section>
     <div class="page-header">
-      <h1>need our help</h1>
+      <h1 style="text-align: center;">Need our help</h1>
     </div>
     
     <main ng-cloak>
@@ -107,11 +107,11 @@
               <button type="button" class="btn btn-info" ng-click="back('stage1')">Back</button>
               <button type="button" class="btn btn-primary" ng-click="next('stage3')">Next</button>
             </div>
-            <div class="animate-switch" ng-switch-when="stage3">
+            <div class="animate-switch" ng-switch-when="stage3" >
               <h3>Summary</h3>
-              <p>offer choose : {{ choiceOfplan }}</p>
-              <p>date of RDV: {{formParams.hourRdv}}</p>
-              <p>hour of RDV: {{formParams.dateRdv}}</p>
+              <p>Offer choose : {{ choiceOfplan }}</p>
+              <p>Date of RDV: {{formParams.hourRdv}}</p>
+              <p>Hour of RDV: {{formParams.dateRdv}}</p>
               <div class="col-md-6">
 
                 <div class="form-group">
@@ -165,10 +165,10 @@
                   <i class="fa fa-info-circle" style="cursor:help;" tooltip-placement="right" uib-tooltip="The infos of schedule will be send to the email you have give in field. If you dont want it, uncheck this case."></i>
                 </div>
   
-  
+                <button type="button" class="btn btn-info" ng-click="back('stage2')">Back</button>
+                <button type="button" class="btn btn-warning" ng-click="submitForm()">Submit</button>
               </div>
-              <button type="button" class="btn btn-info" ng-click="back('stage2')">Back</button>
-              <button type="button" class="btn btn-warning" ng-click="submitForm()">Submit</button>
+      
             </div>
             <div class="animate-switch" ng-switch-when="success">
               <div class="success-wrap">
