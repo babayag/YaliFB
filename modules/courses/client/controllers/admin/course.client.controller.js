@@ -5,9 +5,9 @@
     .module('courses.admin')
     .controller('CoursesAdminController', CoursesAdminController);
 
-  CoursesAdminController.$inject = ['$scope', '$state', '$window','$uibModal', 'courseResolve', 'Authentication', 'Notification'];
+  CoursesAdminController.$inject = ['$scope', '$state', '$window','$uibModal', 'courseResolve', 'Authentication', 'Notification', 'Upload'];
 
-  function CoursesAdminController($scope, $state, $window, $uibModal, course, Authentication, Notification) {
+  function CoursesAdminController($scope, $state, $window, $uibModal, course, Authentication, Notification, Upload) {
     var vm = this;
 
     vm.course = course;
@@ -33,13 +33,54 @@
       windowClass: "animated fadeInY"
   });
     }
+
+
+    function generateFileName(initialFile) {
+
+      var initialFileName, fileExtension;
+      var fileName = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      for (var i = 0; i < 30; i++)
+          fileName += possible.charAt(Math.floor(Math.random() * possible.length));
+
+      initialFileName = initialFile ;
+      fileExtension = initialFileName.replace(/^.*\./, '');
+
+      return fileName+"."+fileExtension;
+  }
+
+
+  vm.upload = function (file) { console.log(file);
+      var newFileName = generateFileName(file.name);
+      file = Upload.rename(file, newFileName);
+
+      console.log(file);
+
+      Upload.upload({
+          url: '/api/users/fileupload',      //webAPI exposed to upload the file
+          data: {file: file}  //pass file as data, should be user ng-model
+      });
+
+
+      var finalResult = "/modules/courses/client/img/pdfWorksheet/" + newFileName;
+      console.log(vm.course);
+      vm.course.Worksheet = finalResult;  // set the value of worksheet as a string made of the pathto the file and the new generated file name
+      console.log(vm.course);
+
+
+  };
+
+
   
     // Save Course
     function save(isValid) {
-      if (!isValid) {
+      if (!isValid || !vm.form.courseForm.file.$valid || !vm.file) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.courseForm');
         return false;
       }
+      
+      vm.upload(vm.file); //call upload function
 
       // Create a new course, or update the current instance
       vm.course.createOrUpdate()

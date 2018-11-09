@@ -12,6 +12,10 @@ module.exports = function (app) {
     .get(courses.list)
     .post(courses.create);
 
+
+  app.route('/api/users/fileupload').post(courses.storePdfWorksheet);
+
+
   // Single article routes
   app.route('/api/courses/:courseId').all(coursesPolicy.isAllowed)
     .get(courses.read)

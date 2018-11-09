@@ -13,16 +13,20 @@
       </em>
     </small>
   </div>  
-  <div>  
+  <div class="col-md-8">
     <video  width="720" height="450" controls>
       <source src="/modules\courses\client\videos\video.mp4" type="video/mp4">
     </video>
-</div>
-<!-- 
-  <iframe width="820" height="550"
-    src="https://www.youtube.com/watch?v=IikiXah9OVM&list=RDIikiXah9OVM&start_radio=1">
-  </iframe> -->
 
-  <p class="lead" ng-bind="vm.course.content"></p>
-  
+    <form class="downloadBtn"  method="get" action="{{vm.course.Worksheet}}">
+      <button  type="submit" class="btn btn-primary ">
+        <span class="glyphicon glyphicon-download-alt downloadIcon"></span>Download Worksheet
+      </button>
+    </form>
+  </div>
+  <div class="col-md-8 ">
+  <a ui-sref="courses.askHelp" class="btn btn-info pull-right helpBtn">Do You need help?</a>
+    <p class="lead" ng-bind="vm.course.content"></p>
+  </div>
+
 </section>

@@ -1,5 +1,28 @@
+.coursesLinks{
+    width: 32%;
+    margin: 7px;
 
+  }
+.courseContainer{
+    padding: 0;
+    margin: 0; 
+}
 
+.downloadBtn{
+    padding-top: 10px;
+}
+
+.downloadIcon{
+    margin-right: 5px;
+}
+
+.helpBtn{
+    margin-top: -33px;
+}
+
+.lead{
+    padding-top: 20px;
+}
 .day {
     display: table-cell;
     vertical-align: middle;

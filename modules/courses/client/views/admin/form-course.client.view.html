@@ -43,19 +43,33 @@
         -->
         </div>
         <div class="form-group" show-errors>
-          <label class="control-label colorT" for="title">Worksheet</label>
-          <input name="Worksheet" type="text" ng-model="vm.course.Worksheet" id="Worksheet" class="form-control" placeholder="Worksheet" required autofocus>
-          <div ng-messages="vm.form.courseForm.Worksheet.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Worksheet title is required.</p>
-          </div>
+          <label class="control-label colorT" for="worksheet">Worksheet (Upload the File)</label>
+
+          <input
+          type="file"
+          ngf-select
+          ng-model="vm.file"
+          name="file"
+          ngf-pattern="'*'"
+          accept="application/pdf"
+          ngf-max-size="20MB"
+          required="required"
+          class="btn fileInput"
+          id="worksheet"
+          />
+          <b><i ng-show="vm.form.courseForm.file.$error.maxSize">This File is too large!!
+            {{vm.file.size / 1000000|number:1}}MB: max 20MB</i>
+          </b>
         </div>
+
+
         <div class="form-group">
           <label class="control-label colorT" for="content">Content</label>
           <textarea name="content" data-ng-model="vm.course.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
         </div>
         <div class="form-group">
           <button type="submit" class="btn btn-info">{{vm.course._id ? 'Update' : 'Create'}}</button>
-          <button class="btn btn-danger pull-right"  type="button" ng-click="vm.openModal()"><i class="glyphicon glyphicon-trash"></i></button>
+          <button class="btn btn-danger pull-right" ng-if="!vm.course._id"  type="button" ng-click="vm.openModal()"><i class="glyphicon glyphicon-trash"></i></button>
         </div>
       </fieldset>
     </form>

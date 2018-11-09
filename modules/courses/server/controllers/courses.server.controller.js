@@ -8,12 +8,13 @@ var path = require('path'),
   Course = mongoose.model('Course'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   request = require('superagent'),
+  multer = require('multer'),
   apiKey = "9e2b6b2b6cf8a4d693c3c5b0c7956722",
   listId = "10602946";
 
 
 /**
- * Create an course
+ * Create a course
  */
 exports.create = function (req, res) {
   var course = new Course(req.body);
@@ -29,6 +30,46 @@ exports.create = function (req, res) {
     }
   });
 };
+
+
+/**
+ * Store pdf worksheet  of a course
+ */
+exports.storePdfWorksheet = function (req, res) {  //console.log(res);
+  var storage = multer.diskStorage({ //multers disk storage settings
+    destination: function (req, file, cb) {
+      cb(null, './modules/courses/client/img/pdfWorksheet/');
+    },
+    filename: function (req, file, cb) {
+
+      var fileName = file.originalname;
+      console.log(fileName);
+
+      cb(null, fileName);
+
+    }
+
+
+  });
+
+  var upload = multer({ //multer settings
+    storage: storage
+  }).single('file');
+
+  upload(req,res,function(err){
+    if(err){
+      console.log(err);
+      //res.json({error_code:1,err_desc:err});
+      return false;
+    }
+    //res.json({error_code:0,err_desc:null});
+    return true;
+  });
+
+};
+
+
+
 
 /**
  * Show the current course
