@@ -12,12 +12,12 @@
         <span ng-if="!course.user">Deleted User</span>
       </small> -->
       <h4 class="list-group-item-heading" ng-bind="course.title"></h4>
-      <video pster="/modules\courses\client\img\thumbnail.jpg" width="320" height="240">
+      <video pster="/modules\courses\client\img\thumbnail.jpg" >
         <source src="/modules\courses\client\videos\video.mp4" type="video/mp4">
         <!-- <source src="movie.ogg" type="video/ogg"> -->
         Your browser does not support the video tag.
-      </video>     
-      <p class="list-group-item-text" ng-bind="course.content"></p>
+      </video>
+      <p class="list-group-item-text theContent" ng-bind="course.content"></p>
 
     </a>
   </div>
