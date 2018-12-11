@@ -9,6 +9,17 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   request = require('superagent'),
   multer = require('multer'),
+
+  /*
+   * @achilsowa
+   *
+   * Variable like apiKey should be define in the config and not in the code directly
+   * so other methods and files can use the same and it case it change we only change that once
+   * And the give config file should be ignore when pushing data
+   * If the data is too important and critical, it must be move to an external file which is never pushed
+   * 
+   * The same for listId for now, which ideal should be configure directly from the user interface
+  */
   apiKey = "9e2b6b2b6cf8a4d693c3c5b0c7956722",
   listId = "10602946";
 
@@ -20,6 +31,14 @@ exports.create = function (req, res) {
   var course = new Course(req.body);
   course.user = req.user;
 
+  /* 
+   * @achilsowa
+   *
+   * Even though mean does not use it by default, prefere a library like status to define statuses
+   * using their name instead of the final code
+   * It is more expressive on what you want to return
+   * 
+  */
   course.save(function (err) {
     if (err) {
       return res.status(422).send({
@@ -35,9 +54,29 @@ exports.create = function (req, res) {
 /**
  * Store pdf worksheet  of a course
  */
+
+/* 
+ * @achilsowa
+ * 
+ * Define a global method for uploading file, and another one to store worksheet
+ * This will avoid repetition when you need to save some other file in your course
+ * 
+ */
 exports.storePdfWorksheet = function (req, res) {  //console.log(res);
+
+  /* 
+   * Do we communicate to the user in case of error while uploading the worksheet ?
+   *
+  */
   var storage = multer.diskStorage({ //multers disk storage settings
     destination: function (req, file, cb) {
+      /*       
+       * @achilsowa
+       * 
+       * Perfere a general destination like public/files to old user uploads
+       * /client/image folder is meant for static files used by the module 
+       * just like the file thumbnail.jpg
+       */
       cb(null, './modules/courses/client/img/pdfWorksheet/');
     },
     filename: function (req, file, cb) {
@@ -56,8 +95,8 @@ exports.storePdfWorksheet = function (req, res) {  //console.log(res);
     storage: storage
   }).single('file');
 
-  upload(req,res,function(err){
-    if(err){
+  upload(req, res, function (err) {
+    if (err) {
       console.log(err);
       //res.json({error_code:1,err_desc:err});
       return false;
@@ -144,43 +183,50 @@ exports.list = function (req, res) {
  * 
  */
 
- exports.saveContact = function(req,res) {
-    //console.log(req.body)
-    saveContact(req.body);
- }
+/*       
+ * @achilsowa
+ * 
+ * This should be moved to another file !!!
+ * It is not part of course module and can be use by other modules
+ */
+
+exports.saveContact = function (req, res) {
+  //console.log(req.body)
+  saveContact(req.body);
+}
 /**
  * save Suscriber
  */
 
-function saveContact(data , callback) {
-  
-	var url = 'https://api.mailerlite.com/api/v2/groups/' + listId + '/subscribers';
-	request
-		.post(url)
-		.set('Content-Type', 'application/json;charset=utf-8')
-		.set('X-MailerLite-ApiKey', apiKey)
-		.send({
-			'name': data.fullName,
+function saveContact(data, callback) {
+
+  var url = 'https://api.mailerlite.com/api/v2/groups/' + listId + '/subscribers';
+  request
+    .post(url)
+    .set('Content-Type', 'application/json;charset=utf-8')
+    .set('X-MailerLite-ApiKey', apiKey)
+    .send({
+      'name': data.fullName,
       'email': data.email,
-      '$daterdv' : data.dateRdv,
+      '$daterdv': data.dateRdv,
       '$hourrdv': data.hourRdv,
-      '$phone' : data.phone,
+      '$phone': data.phone,
       '$skypeid': data.skypeId,
       '$message': data.message
-		})
-		.end(function (err, response) {
-			if (err) {
-				return console.log(err);
-			}
+    })
+    .end(function (err, response) {
+      if (err) {
+        return console.log(err);
+      }
 
-			if (response && (response.status < 300 || response.status === 409)) {
-				return console.log(null, response);
-			}
-			return callback({
-				error: true,
-				message: "Error on mailerlite API call"
-			});
-		});
+      if (response && (response.status < 300 || response.status === 409)) {
+        return console.log(null, response);
+      }
+      return callback({
+        error: true,
+        message: "Error on mailerlite API call"
+      });
+    });
 }
 
 /**
