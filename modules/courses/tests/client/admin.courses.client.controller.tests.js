@@ -113,6 +113,7 @@
 
         expect(Notification.error).toHaveBeenCalledWith({ message: errorMessage, title: '<i class="glyphicon glyphicon-remove"></i> Course save error!' });
       });
+
     });
 
     describe('vm.save() as update', function () {
@@ -176,5 +177,14 @@
         expect($state.go).not.toHaveBeenCalled();
       });
     });
+
+    describe("My Test Case On New File Name Generation", function(){
+      
+      it('should verify the generateFileName function', function () {
+          expect($scope.vm.generateFileName("test.pdf")).toContain(".pdf");
+          expect($scope.vm.generateFileName("test.pdf").length).toEqual(34);
+          expect($scope.vm.generateFileName("test.pdf")).toBe("string");
+      });
+    })
   });
 }());

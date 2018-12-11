@@ -13,6 +13,8 @@
     vm.course = course;
     vm.authentication = Authentication;
     vm.form = {};
+    vm.form.courseForm = {};
+      vm.generateFileName = generateFileName;
     vm.openModal = openModal;
     vm.save = save;
 
@@ -51,7 +53,8 @@
   }
 
 
-  vm.upload = function (file) { console.log(file);
+  vm.upload = function (file) {
+      if(!file) return false;
       var newFileName = generateFileName(file.name);
       file = Upload.rename(file, newFileName);
 
@@ -75,7 +78,7 @@
   
     // Save Course
     function save(isValid) {
-      if (!isValid || !vm.form.courseForm.file.$valid || !vm.file) {
+      if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.courseForm');
         return false;
       }
