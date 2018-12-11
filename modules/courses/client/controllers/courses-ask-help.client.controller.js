@@ -20,6 +20,13 @@
       $scope.choiceOfplan = "";
       //$scope.loadRadiodate = loadRadiodate;
       $scope.arrOfdate = loadRadiodate();
+      
+      /* 
+       * @achilsowa
+       *
+       * Service like variables that should be define in a service an injected there
+       * 
+       */      
       $scope.HourRdv = ['02PM to 03PM','03PM to 04PM','04PM to 05PM','05PM to 06PM','06PM to 07PM','07PM to 08PM'];
       $scope.setChoiceOfPlan = setChoiceOfPlan;
       $scope.formParams = {};
@@ -28,6 +35,13 @@
       $scope.toggleJSONView = false;
       $scope.toggleFormErrorsView = false;
 
+      /* 
+       * @achilsowa
+       *
+       * Prefere to affect all $scope method on top of the controller
+       * This help you know at the begining which methods have been added to the scope
+       * 
+       */ 
      
       $scope.formParams = {
         ccEmail: '',
@@ -114,6 +128,16 @@
       }; */
       
       
+      /* 
+       * @achilsowa
+       * 
+       * Avoid to use $http directly in the controller
+       * Perfer define a method to do the job in the service, and the call
+       * that method from the controller
+       * The controller should not be aware of how you get data, it make them more flexible
+       * 
+       */
+
       // Post to desired exposed web service.
       $scope.submitForm = function () {
        var wsUrl = "/api/saveSuscriber";
@@ -128,15 +152,15 @@
           }).then(function successCallback(response) {
             if (response
               && response.data
-              && response.data.status
-              && response.data.status === 'success') {
-              $scope.stage = "success";
-            } else {
-              if (response
-                && response.data
-                && response.data.status
-                && response.data.status === 'error') {
-                $scope.stage = "error";
+              && response.data.status // @achilsowa NO needed
+                && response.data.status === 'success') {
+                $scope.stage = "success";
+              } else {
+                if (response
+                  && response.data
+                  && response.data.status // @achilsowa NO needed
+                  && response.data.status === 'error') {
+                  $scope.stage = "error";
               }
             }
           }, function errorCallback(response) {

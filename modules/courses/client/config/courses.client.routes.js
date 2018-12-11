@@ -9,12 +9,12 @@
 
   function routeConfig($stateProvider) {
     $stateProvider
-    .state('courses.askHelp', {
-      url: '/course-help',
-      templateUrl: '/modules/courses/client/views/courses-ask-help.client.view.html',
-      controller: 'CourseAskHelpController',
-      controllerAs: 'vm'
-    })
+      .state('courses.askHelp', {
+        url: '/course-help',
+        templateUrl: '/modules/courses/client/views/courses-ask-help.client.view.html',
+        controller: 'CourseAskHelpController',
+        controllerAs: 'vm'
+      })
       .state('courses', {
         abstract: true,
         url: '/courses',
@@ -38,7 +38,7 @@
           pageTitle: '{{ courseResolve.title }}'
         }
       })
-     ;
+      ;
   }
 
   getCourse.$inject = ['$stateParams', 'CoursesService'];

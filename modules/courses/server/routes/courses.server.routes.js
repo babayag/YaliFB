@@ -12,7 +12,12 @@ module.exports = function (app) {
     .get(courses.list)
     .post(courses.create);
 
-
+  /*
+   * @achilsowa
+   *
+   * Should add policy for file upload and save subscriber
+   * 
+   */ 
   app.route('/api/users/fileupload').post(courses.storePdfWorksheet);
 
 
