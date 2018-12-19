@@ -7,6 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   Course = mongoose.model('Course'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
+  configAPI = require(path.resolve('./config/configApi')),
   request = require('superagent'),
   multer = require('multer'),
 
@@ -22,7 +23,7 @@ var path = require('path'),
   */
   apiKey = "9e2b6b2b6cf8a4d693c3c5b0c7956722",
   listId = "10602946";
-
+  //console.log(configAPI);
 
 /**
  * Create a course
@@ -120,7 +121,7 @@ exports.read = function (req, res) {
   // Add a custom field to the Course, for determining if the current User is the "owner".
   // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Course model.
   course.isCurrentUserOwner = !!(req.user && course.user && course.user._id.toString() === req.user._id.toString());
-
+  console.log(configAPI);
   res.json(course);
 };
 
@@ -200,11 +201,11 @@ exports.saveContact = function (req, res) {
 
 function saveContact(data, callback) {
 
-  var url = 'https://api.mailerlite.com/api/v2/groups/' + listId + '/subscribers';
+  var url = configAPI.mailerLite.urlGroup + listId + '/subscribers';
   request
     .post(url)
     .set('Content-Type', 'application/json;charset=utf-8')
-    .set('X-MailerLite-ApiKey', apiKey)
+    .set('X-MailerLite-ApiKey', configAPI.mailerLite.apiKey)
     .send({
       'name': data.fullName,
       'email': data.email,
