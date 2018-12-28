@@ -77,8 +77,10 @@ exports.storePdfWorksheet = function (req, res) {  //console.log(res);
        * Perfere a general destination like public/files to old user uploads
        * /client/image folder is meant for static files used by the module 
        * just like the file thumbnail.jpg
+       * 
+       * ALREADY DONE
        */
-      cb(null, './modules/courses/client/img/pdfWorksheet/');
+      cb(null, './public/worksheets/');
     },
     filename: function (req, file, cb) {
 

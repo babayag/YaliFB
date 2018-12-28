@@ -69,7 +69,7 @@
         data: { file: file }  //pass file as data, should be user ng-model
       });
 
-      var finalResult = "/modules/courses/client/img/pdfWorksheet/" + newFileName;
+      var finalResult = "/worksheets/" + newFileName;
       console.log(vm.course);
       vm.course.Worksheet = finalResult;  // set the value of worksheet as a string made of the pathto the file and the new generated file name
       console.log(vm.course);
