@@ -27,6 +27,8 @@
            * Service like variables that should be define in a service an injected there
            *
            * Already Done
+           * 
+           * Good
            */
           $scope.HourRdv = RdvService.rdvhoursload();
           $scope.setChoiceOfPlan = setChoiceOfPlan;
@@ -48,6 +50,7 @@
              *
              * ALREADY DONE
              *
+             * Good
              */
 
           $scope.formParams = {
@@ -86,6 +89,9 @@
            * that method from the controller
            * The controller should not be aware of how you get data, it make them more flexible
            * Already done
+           * 
+           * Good
+           * Now you should remove $http as an injected service in this controller
            */
 
           // Post to desired exposed web service.

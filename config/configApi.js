@@ -6,3 +6,15 @@ const configAPI = {
    };
 
 module.exports = configAPI;
+
+/*
+   * @achilsowa
+   *
+   * Interesting, but ideally you should move it in config/env/local.js which you can build from
+   * config/even/local.example.js
+   * It is the file meant for that
+   * and in modules\courses\server\controllers\courses.server.controller.js you should remove the variable apiKey
+   * Finally config/env/local.js should not be pushed to github
+   * 
+  */
+  
