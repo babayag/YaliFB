@@ -8,7 +8,8 @@ var path = require('path'),
   Course = mongoose.model('Course'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   configAPI = require(path.resolve('./config/configApi')),
-  request = require('superagent'),
+  //request = require('superagent'),
+  contact = require('../controllers/courses-ask-help.server.controller'),
   multer = require('multer'),
 
   /*
@@ -21,7 +22,6 @@ var path = require('path'),
    * 
    * The same for listId for now, which ideal should be configure directly from the user interface
   */
-  apiKey = "9e2b6b2b6cf8a4d693c3c5b0c7956722",
   listId = "10602946";
   //console.log(configAPI);
 
@@ -189,45 +189,12 @@ exports.list = function (req, res) {
  * 
  * This should be moved to another file !!!
  * It is not part of course module and can be use by other modules
+ * already done move in courses-ask-help.server.controller.js
  */
 
 exports.saveContact = function (req, res) {
   //console.log(req.body)
-  saveContact(req.body);
-}
-/**
- * save Suscriber
- */
-
-function saveContact(data, callback) {
-
-  var url = configAPI.mailerLite.urlGroup + listId + '/subscribers';
-  request
-    .post(url)
-    .set('Content-Type', 'application/json;charset=utf-8')
-    .set('X-MailerLite-ApiKey', configAPI.mailerLite.apiKey)
-    .send({
-      'name': data.fullName,
-      'email': data.email,
-      '$daterdv': data.dateRdv,
-      '$hourrdv': data.hourRdv,
-      '$phone': data.phone,
-      '$skypeid': data.skypeId,
-      '$message': data.message
-    })
-    .end(function (err, response) {
-      if (err) {
-        return console.log(err);
-      }
-
-      if (response && (response.status < 300 || response.status === 409)) {
-        return console.log(null, response);
-      }
-      return callback({
-        error: true,
-        message: "Error on mailerlite API call"
-      });
-    });
+  contact.saveContact(req.body);
 }
 
 /**
