@@ -4,7 +4,8 @@
  * Module dependencies
  */
 var coursesPolicy = require('../policies/courses.server.policy'),
-  courses = require('../controllers/courses.server.controller');
+  courses = require('../controllers/courses.server.controller'),
+  conctat = require('../controllers/courses-ask-help.server.controller');
 
 module.exports = function (app) {
   // Articles collection routes
@@ -28,7 +29,7 @@ module.exports = function (app) {
     .delete(courses.delete);
   // register the suscriber and the offer
 
-  app.route('/api/saveSuscriber').post(courses.saveContact);
+  app.route('/api/saveSuscriber').post(conctat.saveContact);
 
   // Finish by binding the article middleware
   app.param('courseId', courses.courseByID);

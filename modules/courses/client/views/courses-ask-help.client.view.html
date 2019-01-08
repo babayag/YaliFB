@@ -235,6 +235,19 @@
                       <p class="help-block error-text" ng-message="required">Last name is required.</p>
                   </div>
                 </div>
+
+                 <div class="form-group" show-errors>
+                  <label class="control-label" for="listid" style="font-size: 14px;">
+                    List Id
+                  </label>
+  
+                  <input type="text" rows="6" class="form-control" name="listid" ng-model="formParams.listId" required >
+                  <div ng-messages="vm.multiStepForm.listId.$error" role="alert">
+                      <p class="help-block error-text" ng-message="required">Last List Id is required.</p>
+                  </div>
+                </div>
+
+
                 <div class="form-group" show-errors>
                   <label class="control-label" for="details" style="font-size: 14px;">
                     Describe the subject of the schedule

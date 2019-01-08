@@ -190,44 +190,11 @@ exports.list = function (req, res) {
  * It is not part of course module and can be use by other modules
  */
 
-exports.saveContact = function (req, res) {
-  //console.log(req.body)
-  saveContact(req.body);
-}
-/**
- * save Suscriber
- */
 
-function saveContact(data, callback) {
 
-  var url = 'https://api.mailerlite.com/api/v2/groups/' + listId + '/subscribers';
-  request
-    .post(url)
-    .set('Content-Type', 'application/json;charset=utf-8')
-    .set('X-MailerLite-ApiKey', apiKey)
-    .send({
-      'name': data.fullName,
-      'email': data.email,
-      '$daterdv': data.dateRdv,
-      '$hourrdv': data.hourRdv,
-      '$phone': data.phone,
-      '$skypeid': data.skypeId,
-      '$message': data.message
-    })
-    .end(function (err, response) {
-      if (err) {
-        return console.log(err);
-      }
 
-      if (response && (response.status < 300 || response.status === 409)) {
-        return console.log(null, response);
-      }
-      return callback({
-        error: true,
-        message: "Error on mailerlite API call"
-      });
-    });
-}
+
+
 
 /**
  * Course middleware
