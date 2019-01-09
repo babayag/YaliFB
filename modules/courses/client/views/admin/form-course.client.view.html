@@ -5,17 +5,16 @@
 <br>
 <br>
 <br>
-  
  <section id="containPage">
    <div id="mainContain">
-     
+
   <div>
     <h1 class="colorT blockB" style="text-align: center; "> {{vm.course._id ? 'Edit Course' : 'New Course'}}</h1>
    <!-- <button id="btnS" type="submit" class="btn btn-default blockB">{{vm.course._id ? 'Update' : 'Create'}}</button>-->
   </div>
- 
+
 <hr id="barD">
-  
+
 
   <br>
   <div class="col-md-">
@@ -23,18 +22,34 @@
       <fieldset>
         <div class="form-group" show-errors>
           <label class="control-label colorT" for="title">Title</label>
-          <input name="title" type="text" ng-model="vm.course.title" id="title" class="form-control" placeholder="Title" required autofocus>
+          <input name="title" type="text" ng-model="vm.course.title" id="title" class="form-control" placeholder="Title" required autofocus >
           <div ng-messages="vm.form.courseForm.title.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Course title is required.</p>
           </div>
         </div>
-        
+
+        <div class="form-group">
+          <label class="control-label colorT" for="content">Content</label>
+          <textarea name="content" data-ng-model="vm.course.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+        </div>
+
+
         <div class="form-group" show-errors>
-          <label class="control-label colorT" for="videoLink">VideoLink</label>
-          <input name="videoLink" type="text" ng-model="vm.course.videoLink" id="videoLink" class="form-control" placeholder="videoLink" required autofocus>
+        <div ng-if="vm.course._id">
+          <button ng-disabled="vm.isDisabled" type="button" class="btn btn-info" for="videoLink" ng-init="clicked=false" ng-click="clicked=true"> Update Video </button>
+         <br>
+          <input style="margin-top: 10px" name="videoLink" type="text" ng-model="vm.course.videoLink" ng-if="clicked" id="videoLink" class="form-control" placeholder="Video Link" required autofocus>
           <div ng-messages="vm.form.courseForm.videoLink.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Video URL is required.</p>
+            <p class="help-block error-text" ng-message="required">videoLink title is required.</p>
           </div>
+        </div>
+
+        <div ng-if="!vm.course._id">
+          <input style="margin-top: 10px" name="videoLink" type="text" ng-model="vm.course.videoLink" id="videoLink" class="form-control" placeholder="Video Link" required autofocus>
+          <div ng-messages="vm.form.courseForm.videoLink.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">videoLink title is required.</p>
+          </div>
+        </div>
 
         <!-- <iframe width="100" height="50"
             src="url_de_ta_video">
@@ -43,9 +58,10 @@
         -->
         </div>
         <div class="form-group" show-errors>
-          <label class="control-label colorT" for="worksheet">Worksheet (Upload the File)</label>
+          <button ng-disabled="vm.isDisabled" type="button"class="btn btn-info" for="worksheet" ng-init="clickedWorksheet=false;" ng-click="openFileUploader(); clickedWorksheet=true;"> {{vm.course._id ? 'Update Worksheet' : 'Add Worksheet'}}  </button>
 
           <input
+          style="margin-top: 5px"
           type="file"
           ngf-select
           ng-model="vm.file"
@@ -53,9 +69,10 @@
           ngf-pattern="'*'"
           accept="application/pdf"
           ngf-max-size="20MB"
-          required="required"
+
           class="btn fileInput"
           id="worksheet"
+          ng-if="clickedWorksheet"
           />
           <b><i ng-show="vm.form.courseForm.file.$error.maxSize">This File is too large!!
             {{vm.file.size / 1000000|number:1}}MB: max 20MB</i>
@@ -63,20 +80,18 @@
         </div>
 
 
+
         <div class="form-group">
-          <label class="control-label colorT" for="content">Content</label>
-          <textarea name="content" data-ng-model="vm.course.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-info">{{vm.course._id ? 'Update' : 'Create'}}</button>
-          <button class="btn btn-danger pull-right" ng-if="vm.course._id"  type="button" ng-click="vm.openModal()"><i class="glyphicon glyphicon-trash"></i></button>
+          <button type="submit" ng-disabled="vm.isDisabled" class="btn btn-success">{{vm.course._id ? 'Update' : 'Create'}}</button>
+          <button class="btn btn-danger pull-right" ng-disabled="vm.isDisabled" ng-if="vm.course._id"  type="button" ng-click="vm.openModal()"><i class="glyphicon glyphicon-trash"></i></button>
         </div>
       </fieldset>
     </form>
   </div>
 
 </div>
- </section>
+</section>
+
  <br>
  <br>
  <br>

@@ -12,13 +12,13 @@
         <span ng-if="!vm.course.user">Deleted User</span>
       </em>
     </small>
-  </div>  
+  </div>
   <div class="col-md-8">
     <video  width="720" height="450" controls>
       <source src="/modules\courses\client\videos\video.mp4" type="video/mp4">
     </video>
 
-    <form class="downloadBtn"  method="get" action="{{vm.course.Worksheet}}">
+    <form class="downloadBtn"  method="get" target="_blank" action="{{vm.course.Worksheet}}">
       <button  type="submit" class="btn btn-primary ">
         <span class="glyphicon glyphicon-download-alt downloadIcon"></span>Download Worksheet
       </button>

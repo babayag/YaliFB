@@ -9,6 +9,7 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   request = require('superagent'),
   multer = require('multer'),
+  nStatic = require('node-static'),
 
   /*
    * @achilsowa
@@ -23,6 +24,8 @@ var path = require('path'),
   apiKey = "9e2b6b2b6cf8a4d693c3c5b0c7956722",
   listId = "10602946";
 
+
+  var fileServer = new nStatic.Server('./public');
 
 /**
  * Create a course
@@ -77,7 +80,9 @@ exports.storePdfWorksheet = function (req, res) {  //console.log(res);
        * /client/image folder is meant for static files used by the module 
        * just like the file thumbnail.jpg
        */
-      cb(null, './modules/courses/client/img/pdfWorksheet/');
+
+      
+      cb(null, './public/worksheets/');
     },
     filename: function (req, file, cb) {
 
@@ -98,10 +103,10 @@ exports.storePdfWorksheet = function (req, res) {  //console.log(res);
   upload(req, res, function (err) {
     if (err) {
       console.log(err);
-      //res.json({error_code:1,err_desc:err});
+      res.json({error_code:1,err_desc:null});
       return false;
     }
-    //res.json({error_code:0,err_desc:null});
+    res.json({error_code:0,err_desc:null});
     return true;
   });
 
@@ -133,7 +138,7 @@ exports.update = function (req, res) {
   course.title = req.body.title;
   course.content = req.body.content;
   course.Worksheet = req.body.Worksheet;
-  course.videoLink = req.body.videoLink
+  course.videoLink = req.body.videoLink;
 
   course.save(function (err) {
     if (err) {
@@ -193,7 +198,7 @@ exports.list = function (req, res) {
 exports.saveContact = function (req, res) {
   //console.log(req.body)
   saveContact(req.body);
-}
+};
 /**
  * save Suscriber
  */

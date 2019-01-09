@@ -1,7 +1,7 @@
 
 .courseContainer{
     padding: 0;
-    margin: 0; 
+    margin: 0;
 }
 
 .downloadBtn{
@@ -98,7 +98,7 @@
     margin-top: 5px;
     margin-bottom: 0px;
     font-size: 1.2em;
-    font-weight: 200;   
+    font-weight: 200;
 }
 .summaryDiv span{
     color : #00A2FF;
@@ -126,7 +126,7 @@
     height: 240px;
 }
 
-.theContent{ 
+.theContent{
     word-break: break-all;
     text-overflow: ellipsis;
     margin-top: 10px;
@@ -157,7 +157,7 @@
         width: 31%;
         margin: 7px;
     }
-    
+
 }
 
   @media screen and (max-width: 992px) {
@@ -187,9 +187,9 @@
         margin: 7px;
     }
   }
-  
 
-  
+
+
   @media screen and (max-width: 590px) {
     .timeBox{
         padding-left: 0%;
